@@ -1,0 +1,39 @@
+name: Validate Plugin PR
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Validate catalog, manifests, commits and release policy
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          RELEASE_PR: ${{ github.event.pull_request.head.ref == 'release-please--branches--main' && github.event.pull_request.head.repo.full_name == github.repository }}
+        run: npm run validate
+      - name: Validate with Claude Code
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude plugin validate .
+      - name: Check infrastructure syntax and release tests
+        run: |
+          git ls-files '*.sh' '.githooks/*' | while IFS= read -r file; do bash -n "$file"; done
+          bash scripts/tests/run-tests.sh
+      - name: Test changed plugins
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/release/test-plugins.mjs

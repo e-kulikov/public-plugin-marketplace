@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "chatgpt-backup",
+  "description": "Back up ChatGPT conversations, projects and attached files to a local folder (Markdown + JSON) with incremental updates",
+  "version": "1.0.0",
+  "author": {
+    "name": "Evgeny Kulikov",
+    "email": "evgeny.kulikov@outlook.com"
+  },
+  "dependencies": [
+    "agent-browser@agent-browser"
+  ],
+  "skills": "./skills/"
+}

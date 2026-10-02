@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "e-kulikov-public-ai-marketplace",
+  "owner": {
+    "name": "Evgeny Kulikov",
+    "email": "evgeny.kulikov@outlook.com"
+  },
+  "metadata": {
+    "description": "Public e-kulikov plugin marketplace for Claude Code and GitHub Copilot CLI",
+    "version": "1.0.0"
+  },
+  "allowCrossMarketplaceDependenciesOn": [
+    "agent-browser"
+  ],
+  "plugins": [
+    {
+      "name": "chatgpt-backup",
+      "source": "./plugins/chatgpt-backup",
+      "description": "Back up ChatGPT conversations, projects and files to a local folder (Markdown + JSON) with incremental updates",
+      "version": "1.0.0",
+      "category": "tooling"
+    }
+  ]
+}

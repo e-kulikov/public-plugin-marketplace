@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+while IFS=' ' read -r local_ref local_sha remote_ref remote_sha; do
+  [ "$local_sha" = "0000000000000000000000000000000000000000" ] && continue
+  [ "$local_sha" = "$(git rev-parse HEAD)" ] || continue
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||' || true)
+  default_branch=${default_branch:-main}
+  git fetch origin "$default_branch" --quiet
+  export BASE_SHA
+  BASE_SHA=$(git merge-base HEAD "origin/$default_branch")
+  export RELEASE_PR=false
+  if [ "$(git branch --show-current)" = 'release-please--branches--main' ]; then RELEASE_PR=true; fi
+  npm run validate
+  npm test
+  node scripts/release/test-plugins.mjs
+  if command -v claude >/dev/null 2>&1; then claude plugin validate .; fi
+done
