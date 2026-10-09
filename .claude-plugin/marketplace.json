@@ -19,6 +19,13 @@
       "description": "Back up ChatGPT conversations, projects and files to a local folder (Markdown + JSON) with incremental updates",
       "version": "1.0.0",
       "category": "tooling"
+    },
+    {
+      "name": "teams-backup",
+      "source": "./plugins/teams-backup",
+      "description": "Back up Microsoft Teams chats (messages by date range, attached files) and meeting transcripts - including ones that cannot be downloaded - into a local folder",
+      "version": "1.0.0",
+      "category": "tooling"
     }
   ]
 }
