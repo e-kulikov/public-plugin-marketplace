@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "teams-backup",
+  "description": "Back up Microsoft Teams chats (messages by date range, attached files) and meeting transcripts - including ones that cannot be downloaded - into a local folder",
+  "version": "1.0.0",
+  "author": {
+    "name": "Evgeny Kulikov",
+    "email": "evgeny.kulikov@outlook.com"
+  },
+  "dependencies": [
+    "agent-browser@agent-browser"
+  ],
+  "skills": "./skills/"
+}

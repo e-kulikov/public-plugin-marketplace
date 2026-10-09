@@ -9,14 +9,16 @@ Public plugins for Claude Code and GitHub Copilot CLI.
 claude plugin marketplace add 'e-kulikov/public-plugin-marketplace#stable'
 claude plugin marketplace add vercel-labs/agent-browser
 claude plugin install chatgpt-backup@e-kulikov-public-ai-marketplace
+claude plugin install teams-backup@e-kulikov-public-ai-marketplace
 
 # GitHub Copilot CLI
 copilot plugin marketplace add 'e-kulikov/public-plugin-marketplace#stable'
 copilot plugin marketplace add vercel-labs/agent-browser
 copilot plugin install chatgpt-backup@e-kulikov-public-ai-marketplace
+copilot plugin install teams-backup@e-kulikov-public-ai-marketplace
 ```
 
-See [chatgpt-backup](plugins/chatgpt-backup/README.md) for requirements and usage.
+See [chatgpt-backup](plugins/chatgpt-backup/README.md) and [teams-backup](plugins/teams-backup/README.md) for requirements and usage.
 
 ## Update
 
@@ -33,6 +35,7 @@ npm ci --ignore-scripts
 npm run validate
 npm test
 bash plugins/chatgpt-backup/tests/run-tests.sh
+bash plugins/teams-backup/tests/run-tests.sh
 ```
 
 Develop on branches using Conventional Commits and open pull requests to `main`.
